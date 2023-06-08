@@ -113,14 +113,7 @@ int main(int argc, char* argv[]) {
 
     // Parsing arguments using 'getopt' function
     int opt;
-    while ((opt = getopt_long(argc, argv, "edh?", long_options, nullptr)) != -1) {
-        if (opt == '?') {
-            // Обработка некорректной опции
-            std::cerr << "Unknown option: " << argv[optind - 1] << std::endl;
-            PrintHelp();
-            return 1;
-        }
-
+    while ((opt = getopt_long(argc, argv, "e:d:hs:p:", long_options, nullptr)) != -1) {
         switch (opt) {
         case 'e':
             encode_mode = true;
@@ -140,7 +133,14 @@ int main(int argc, char* argv[]) {
             PrintHelp();
             return 0;
         default:
-            std::cerr << "Unknown option: " << opt << std::endl;
+            std::cerr << "Unknown option: ";
+            if (optopt) {
+                std::cerr << "-" << static_cast<char>(optopt);
+            }
+            else {
+                std::cerr << argv[optind - 1];
+            }
+            std::cerr << std::endl;
             PrintHelp();
             return 1;
         }
