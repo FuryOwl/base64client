@@ -10,9 +10,6 @@ target_include_directories(base64client PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(UNIX)
     target_compile_definitions(base64client PRIVATE UNIX)
-    find_library(GETOPT_LIBRARIES getopt)
-    target_link_libraries(base64client PRIVATE ${CMAKE_LIBRARIES})
-    target_link_libraries(base64client PRIVATE ${GETOPT_LIBRARIES})
     target_link_libraries(base64client PRIVATE pthread)  # Link the pthread library
 elseif(WIN32)
     target_compile_definitions(base64client PRIVATE WIN32)

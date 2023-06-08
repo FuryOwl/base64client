@@ -114,6 +114,13 @@ int main(int argc, char* argv[]) {
     // Parsing arguments using 'getopt' function
     int opt;
     while ((opt = getopt_long(argc, argv, "eds:p:h?", long_options, nullptr)) != -1) {
+        if (opt == '?') {
+            // Обработка некорректной опции
+            std::cerr << "Unknown option: " << argv[optind - 1] << std::endl;
+            PrintHelp();
+            return 1;
+        }
+
         switch (opt) {
         case 'e':
             encode_mode = true;
@@ -130,7 +137,6 @@ int main(int argc, char* argv[]) {
             server_port = optarg;
             break;
         case 'h':
-        case '?':
             PrintHelp();
             return 0;
         default:
@@ -139,6 +145,7 @@ int main(int argc, char* argv[]) {
             return 1;
         }
     }
+
     // Text processing
     if (optind < argc) {
         input_text = argv[optind];
