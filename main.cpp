@@ -113,7 +113,7 @@ int main(int argc, char* argv[]) {
 
     // Parsing arguments using 'getopt' function
     int opt;
-    while ((opt = getopt_long(argc, argv, "eds:p:h?", long_options, nullptr)) != -1) {
+    while ((opt = getopt_long(argc, argv, "edh?", long_options, nullptr)) != -1) {
         if (opt == '?') {
             // Обработка некорректной опции
             std::cerr << "Unknown option: " << argv[optind - 1] << std::endl;
